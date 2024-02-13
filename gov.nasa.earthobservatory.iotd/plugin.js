@@ -1,7 +1,3 @@
-function identify() {
-  setIdentifier(null);
-}
-
 function load() {
   loadAsync()
     .then(processResults)
