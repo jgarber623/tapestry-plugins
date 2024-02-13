@@ -1,0 +1,6 @@
+{
+  "id": "gov.nasa.earthobservatory.iotd",
+  "display_name": "NASA Earth Observatory Image of the Day",
+  "providesAttachments": true,
+  "check_interval": 300
+}
