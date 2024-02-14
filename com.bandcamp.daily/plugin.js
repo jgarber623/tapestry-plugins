@@ -6,24 +6,25 @@ function load() {
 
 async function loadAsync() {
   const text = await sendRequest("https://daily.bandcamp.com/feed");
-  const obj = xmlParse(text);
+  const { item: items, link } = xmlParse(text).rss.channel;
 
-  const link = obj.rss.channel.link;
-
-  return obj.rss.channel.item.map(item => {
+  return items.map(item => {
     const creator = Creator.createWithUriName(link, item["dc:creator"]);
 
     creator.avatar = "https://s4.bcbits.com/img/favicon/apple-touch-icon.png";
 
-    const matches = item.description.match(/<p>.*?<\/p>/g);
-    const [_, imageUrl] = matches[0].match(/<img\s+(?:.+)?src="(.+?)"(?:\s+.+)?>/);
+    let paragraphs = item.description.match(/<p>.*?<\/p>/g);
 
-    const content = (imageUrl ? matches.slice(1) : matches).join('');
+    const [_, media] = paragraphs[0].match(/<img\s+(?:.+)?src="(.+?)"(?:\s+.+)?>/);
 
-    const post = Post.createWithUriDateContent(item.link, new Date(item["dc:date"]), content);
+    paragraphs = (media ? paragraphs.slice(1) : paragraphs);
 
-    if (imageUrl) {
-      const attachment = Attachment.createWithMedia(imageUrl);
+    paragraphs.unshift(`<p>${item.title}</p>`);
+
+    const post = Post.createWithUriDateContent(item.link, new Date(item["dc:date"]), paragraphs.join(''));
+
+    if (media) {
+      const attachment = Attachment.createWithMedia(media);
 
       post.attachments = [attachment];
     }
