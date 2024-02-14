@@ -10,7 +10,7 @@ async function loadAsync() {
 
   const link = "https://earthobservatory.nasa.gov/topic/image-of-the-day";
 
-  return items.map(item => {
+  return items.map((item) => {
     const creator = Creator.createWithUriName(link, item["dc:creator"]);
 
     creator.avatar = "https://www.nasa.gov/wp-content/plugins/nasa-hds-core-setup/assets/favicons/mstile-310x310.png";

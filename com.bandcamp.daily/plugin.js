@@ -8,7 +8,7 @@ async function loadAsync() {
   const text = await sendRequest("https://daily.bandcamp.com/feed");
   const { item: items, link } = xmlParse(text).rss.channel;
 
-  return items.map(item => {
+  return items.map((item) => {
     const creator = Creator.createWithUriName(link, item["dc:creator"]);
 
     creator.avatar = "https://s4.bcbits.com/img/favicon/apple-touch-icon.png";
