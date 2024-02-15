@@ -1,7 +1,5 @@
 function load() {
-  loadAsync()
-    .then(processResults)
-    .catch(processError);
+  loadAsync().then(processResults).catch(processError);
 }
 
 async function loadAsync() {
