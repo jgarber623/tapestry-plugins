@@ -19,7 +19,7 @@ async function loadAsync() {
 
     paragraphs = (media ? paragraphs.slice(1) : paragraphs);
 
-    paragraphs.unshift(`<p>${item.title}</p>`);
+    paragraphs.unshift(`<p><b>${item.title}</b></p>`);
 
     const post = Post.createWithUriDateContent(item.link, new Date(item["dc:date"]), paragraphs.join(''));
 

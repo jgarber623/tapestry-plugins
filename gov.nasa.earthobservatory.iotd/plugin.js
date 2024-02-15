@@ -25,7 +25,7 @@ async function loadAsync() {
     const [longitude, latitude] = item["georss:point"].split(' ');
 
     const content = `\
-      <p>${item.title}</p>
+      <p><b>${item.title}</b></p>
       <p>${item.description}</p>
       <p>View on <a href="https://earthobservatory.nasa.gov/map#5/${latitude}/${longitude}">EO Explorer</a> or <a href="https://earth.google.com/web/search/${latitude},${longitude}">Google Earth</a>.</p>
     `;
